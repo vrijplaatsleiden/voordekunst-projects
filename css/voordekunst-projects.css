@@ -1,13 +1,11 @@
-body {font-family: 'Source Sans Pro',Arial,Helvetica Neue,Helvetica,sans-serif;}
-
 #vdk-project-image img {
 	width: 100%;
-    height: auto;
+  height: auto;
 }
 
 #vdk-project-title {
 	font-size:24px;
-  font-weight: 700;
+    font-weight: 700;
 	text-transform: uppercase;
 }
 
@@ -22,15 +20,23 @@ body {font-family: 'Source Sans Pro',Arial,Helvetica Neue,Helvetica,sans-serif;}
 /* vdk button */
 #vdk-project-click {width:100%}
 #vdk-project-button {
-    background-color: #4CAF50; /* Green */
+    background-color: #e54b2c; /* Green */
     border: none;
-    color: white;
-		padding: 10px 0px;
+    color: white !important;
+    padding: 10px 0px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
     font-size: 16px;
-    width:100%
+    width:100%;
+}
+
+
+#vdk-progress-label {
+	color: white;
+	font-size: 24px;
+	position: absolute;
+	left: 50%;
 }
 
 .container {
@@ -63,54 +69,24 @@ body {font-family: 'Source Sans Pro',Arial,Helvetica Neue,Helvetica,sans-serif;}
 }
 
 
-/* Styling an indeterminate progress bar */
-
-progress:not(value) {
-    /* Add your styles here. As part of this walkthrough we will focus only on determinate progress bars. */
-}
-
-/* Styling the determinate progress element */
-
-progress[value] {
-    /* Get rid of the default appearance */
-    appearance: none;
-
-    /* This unfortunately leaves a trail of border behind in Firefox and Opera. We can remove that by setting the border to none. */
-    border: none;
-
-    /* Add dimensions */
-    width: 100%; height: 30px;
-
-    /* Although firefox doesn't provide any additional pseudo class to style the progress element container, any style applied here works on the container. */
-      background-color: whiteSmoke;
-      border-radius: 1px;
-      box-shadow: 0px;
-
-    /* Of all IE, only IE10 supports progress element that too partially. It only allows to change the background-color of the progress value using the 'color' attribute. */
-    color: royalblue;
-
+#vdk-project-progress {
+    width: 100%;
+    border: 0px solid black;
     position: relative;
-    margin: 0 0 0.5em;
+    padding: 0px;
+    margin-bottom: 7px;
+    background-color: whitesmoke;
+    height: 30px;
 }
 
-/*
-Webkit browsers provide two pseudo classes that can be use to style HTML5 progress element.
--webkit-progress-bar -> To style the progress element container
--webkit-progress-value -> To style the progress element value.
-*/
-
-progress[value]::-webkit-progress-bar {
-    background-color: whiteSmoke;
-    border-radius: 3px;
-    box-shadow: 0 2px 3px rgba(0,0,0,.5) inset;
+#vdk-project-percent {
+    position: absolute;
+    left: 5%;
+    top: 20%;
 }
 
-progress[value]::-webkit-progress-value {
-    position: relative;
-
-    background-size: 35px 20px, 100% 100%, 100% 100%;
-    border-radius:3px;
-
-    /* Let's animate this */
-    animation: animate-stripes 5s linear infinite;
+#vdk-project-bar {
+    height: 30px;
+    background-color: #0b91c2;
+    width: 30%;
 }
