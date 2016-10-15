@@ -15,13 +15,19 @@ class voordekunst_projects_options {
     public static function get_options_by_project($project_id) {
         $options = self::get_options();
         $options_by_project = [];
+
         foreach($options as $optionKey => $optionValue) {
             $parts = explode('_', $optionKey);
             if ($parts[1] == $project_id) {
                 $options_by_project[$parts[2]] = $optionValue;
             }
         }
-        return $options_by_project;
+
+        if (count($options)) {
+            return $options_by_project;
+        }
+
+        return false;
     }
 
     public static function get_option_key($project_id, $type) {
