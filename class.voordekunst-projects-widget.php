@@ -54,7 +54,7 @@ class voordekunst_projects_widget extends WP_widget {
             $template_html = str_replace('%image%', $options['image'], $template_html);
             $template_html = str_replace('%description%', $options['description'], $template_html);
             $template_html = str_replace('%title%', $score->title, $template_html);
-            $template_html = str_replace('%percentage_donated%', '', $template_html);
+            $template_html = str_replace('%percentage_donated%', $score->percentage_donated, $template_html);
             $template_html = str_replace('%donated_amount%', $score->donated_amount, $template_html);
             $template_html = str_replace('%goal_amount%', $score->goal_amount, $template_html);
             $template_html = str_replace('%num_donors%', $score->num_donors, $template_html);
