@@ -1,7 +1,6 @@
 <?php
 
 add_action('widgets_init', 'voordekunst_projects_register_widgets');
-wp_enqueue_style( 'voordekunst-projects', plugins_url('css/voordekunst-projects.css', __FILE__),false,'1.0','all');
 
 function voordekunst_projects_register_widgets() {
     register_widget('voordekunst_projects_widget');
@@ -44,30 +43,9 @@ class voordekunst_projects_widget extends WP_widget {
 
     public function widget($args, $instance) {
         $project_id = $instance['project_id'];
-        $options = voordekunst_projects_options::get_options_by_project($project_id);
-        $score = voordekunst_projects_db::get_latest_score($project_id);
 
-        if (!$score || !$options) {
-           return;
-        } else {
-            $template_html = file_get_contents(VOORDEKUNST_PROJECTS__PLUGIN_DIR . 'templates/donation-box.html');
-            $template_html = str_replace('%image%', $options['image'], $template_html);
-            $template_html = str_replace('%description%', $options['description'], $template_html);
-            $template_html = str_replace('%title%', $score->title, $template_html);
-            $template_html = str_replace('%percentage_donated%', $score->percentage_donated, $template_html);
-            $template_html = str_replace('%donated_amount%', $score->donated_amount, $template_html);
-            $template_html = str_replace('%goal_amount%', $score->goal_amount, $template_html);
-            $template_html = str_replace('%num_donors%', $score->num_donors, $template_html);
-            $template_html = str_replace('%url%', $score->url, $template_html);
-            if ($score->num_days_left == '0') {
-                $num_day_left = 'afgerond';
-            } else {
-                $num_day_left = $score->num_days_left;
-            }
-            $template_html = str_replace('%num_days_left%', $num_day_left, $template_html);
-        }
         echo($args['before_widget']);
-        echo $template_html;
+        echo voordekunst_projects_display::display_widget($project_id);
         echo($args['after_widget']);
     }
 }

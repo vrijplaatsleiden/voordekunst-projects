@@ -47,16 +47,17 @@ define('VOORDEKUNST_PROJECTS__PLUGIN_URL', plugins_url(__FILE__));
 register_activation_hook(__FILE__, 'vpl_vdk_activate');
 register_deactivation_hook(__FILE__, 'vpl_vdk_deactivate');
 
-// shortcode to display the status of your project into a post [vdk_project id=1234]
-add_shortcode('vdk_project', 'vpl_vdk_sc_project');
-
 if (is_admin()) {
     require_once(VOORDEKUNST_PROJECTS__PLUGIN_DIR . 'class.voordekunst-projects-admin.php');
     add_action( 'init', array( 'voordekunst_projects_admin', 'init' ) );
 }
 require_once(VOORDEKUNST_PROJECTS__PLUGIN_DIR . 'class.voordekunst-projects-db.php');
 require_once(VOORDEKUNST_PROJECTS__PLUGIN_DIR . 'class.voordekunst-projects-options.php');
+require_once(VOORDEKUNST_PROJECTS__PLUGIN_DIR . 'class.voordekunst-projects-display.php');
 require_once(VOORDEKUNST_PROJECTS__PLUGIN_DIR . 'class.voordekunst-projects-widget.php');
+
+// register short codes
+voordekunst_projects_display::register_shortcodes();
 
 /**
  * On plugin activation
@@ -74,16 +75,3 @@ function vpl_vdk_deactivate() {
     // do nothing
 }
 
-function vpl_vdk_sc_project($attr) {
-
-    if (isset($attr['id'])) {
-        $html = '<div>'
-              . '<p><img class="aligncenter" src="https://vrijplaatsleiden.nl/wp-content/uploads/2016/08/ipsYbanner-copy.jpg" alt="ipsYbanner copy" width="754" height="279" /></p>'
-              . '<h2>Title of your voor de kunst project</h2>'
-              .  '<p>Short description about het voor de kunst project wat op de website komt te staan. </p>'
-              . '</div>';
-
-        return $html;
-    }
-    return "";
-}
