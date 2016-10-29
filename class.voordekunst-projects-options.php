@@ -57,5 +57,9 @@ class voordekunst_projects_options {
         }
         return $options;
     }
+
+    public static function delete_options() {
+        delete_option(self::OPTIONS_KEY);
+    }
 }
 

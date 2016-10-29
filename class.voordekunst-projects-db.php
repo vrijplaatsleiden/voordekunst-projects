@@ -21,7 +21,7 @@ class voordekunst_projects_db {
      * Create MySql table
      */
     public static function create_tables() {
-        $table_name = self::get_wpdb()->prefix . 'vdk_projects';
+        $table_name = self::get_table_name();
         $sql = sprintf("CREATE TABLE IF NOT EXISTS %s (
                             id INT AUTO_INCREMENT NOT NULL,
                             project_id INT NOT NULL,
@@ -37,6 +37,12 @@ class voordekunst_projects_db {
                             INDEX vdk_project_idx_1 (project_id, created_at DESC)
                         ) DEFAULT CHARACTER SET utf8 COLLATE utf8_unicode_ci ENGINE = InnoDB;", $table_name);
 
+        self::get_wpdb()->query($sql);
+    }
+
+    public static function delete_tables() {
+        $table_name = self::get_table_name();
+        $sql = sprintf('DROP TABLE IF EXISTS %s', $table_name);
         self::get_wpdb()->query($sql);
     }
 
